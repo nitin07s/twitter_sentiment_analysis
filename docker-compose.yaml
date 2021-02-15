@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  producer:
+    container_name: tweetsentiment_producer
+    build: "./tweet_producer"
+    restart: on-failure
+    volumes:
+      - ./tweet_producer:/tweet_producer
+      - ./config.ini:/tweet_producer/config.ini
+      - ./secrets.ini:/tweet_producer/secrets.ini
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+
+  consumer:
+    container_name: tweetsentiment_consumer
+    build: "./tweet_consumer"
+    restart: on-failure
+    volumes:
+      - ./tweet_consumer:/tweet_consumer
+      - ./config.ini:/tweet_consumer/config.ini
+      - ./secrets.ini:/tweet_consumer/secrets.ini
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
