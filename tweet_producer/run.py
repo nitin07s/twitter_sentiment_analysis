@@ -90,7 +90,7 @@ def main():
     auth.set_access_token(client_token, client_token_secret)
     api = tweepy.API(auth)
     stream = Stream(auth, listner, tweet_mode='extended')
-    stream.filter(track=["#FarmerProtest"], languages=["en"])
+    stream.filter(track=["#Track"], languages=["en"])
 
 
 if __name__ == "__main__":
